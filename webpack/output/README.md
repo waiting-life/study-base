@@ -22,6 +22,40 @@ module.exports = {
 // 写入到硬盘：./dist/app.js, ./dist/search.js
 ```
 
+#### output.library
+
+输出一个库，为你的入口做导出
+一起来看一个简单的示例。
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  // …
+  entry: "./src/index.js",
+  output: {
+    library: "MyLibrary",
+  },
+};
+```
+
+假设你在 src/index.js 的入口中导出了如下函数：
+
+```js
+export function hello(name) {
+  console.log(`hello ${name}`);
+}
+```
+
+此时，变量 MyLibrary 将与你的入口文件所导出的文件进行绑定，下面是如何使用 webpack 构建的库的实现：
+
+```html
+<script src="https://example.org/path/to/my-library.js"></script>
+<script>
+  MyLibrary.hello("webpack");
+</script>
+```
+
 #### 高级进阶
 
 对资源使用 CDN 和 hash
